@@ -246,6 +246,15 @@ async function init(){
   try{ idb=await openDB(); }catch(e){ setBanner("Il browser non permette di salvare dati (forse sei in navigazione in incognito).","err"); return; }
   try{ if(navigator.storage&&navigator.storage.persist) navigator.storage.persist(); }catch(e){}
   items=await req2p(store("items").getAll());
+  if(!items.length && !(await getMeta("storicoDone"))){
+    try{
+      const r=await fetch("storico.json",{cache:"no-store"});
+      if(r.ok){ const d=await r.json(); const t=idb.transaction("items","readwrite"); const st=t.objectStore("items");
+        (d.items||[]).forEach(it=>{ if(it&&it.id&&it.title) st.put(it); }); await txDone(t);
+        await setMeta("storicoDone",true); items=await req2p(store("items").getAll());
+        setTimeout(()=>toast("Storico caricato: "+items.length+" articoli"),300); }
+    }catch(e){}
+  }
   await loadPhotos();
   mode="idb"; render(); backupReminder();
 }
