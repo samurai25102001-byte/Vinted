@@ -1,0 +1,17 @@
+{
+  "name": "Il mio Vinted",
+  "short_name": "Il mio Vinted",
+  "description": "Gestione articoli e statistiche delle vendite Vinted",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f6f4",
+  "theme_color": "#0b7f86",
+  "lang": "it",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
